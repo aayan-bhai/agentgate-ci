@@ -1,0 +1,37 @@
+﻿# Dependencies and build output
+frontend/node_modules/
+frontend/dist/
+node_modules/
+dist/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
+
+# Backup files
+*.backup
+*.pre-integration
+
+# Local archives and checkpoint copies
+*.zip
+backend - Copy/
+backend-checkpoint-*/
+
+# Local secrets
+.env
+.env.*
+!.env.example
