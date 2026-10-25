@@ -1025,3 +1025,261 @@ footer {
     flex-direction: column;
   }
 }
+
+/* Enhancements for AgentGate CI Events, Inspector & Playground */
+
+.nav-item {
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.event-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.resource-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  background: #171d27;
+  border: 1px solid #2a3242;
+  color: #79c0ff;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+  text-transform: none;
+}
+
+.badges-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.decision-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.decision-allowed {
+  background: #15372d;
+  color: #61e6b1;
+  border: 1px solid #215545;
+}
+
+.decision-denied {
+  background: #3b1d22;
+  color: #ff9ca2;
+  border: 1px solid #5d2830;
+}
+
+.blocked-summary-box {
+  margin-top: 15px;
+  background: #1c1519;
+  border: 1px solid #4a232b;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.blocked-summary-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff8e96;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.blocked-summary-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.blocked-summary-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11px;
+  color: #d8deea;
+  padding: 4px 0;
+  line-height: 1.4;
+}
+
+.bullet-stop {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.workspace-panel {
+  margin-top: 18px;
+  background: #11141b;
+  border: 1px solid #252a36;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.workspace-file-card {
+  background: #0e1118;
+  border: 1px solid #222735;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.file-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.file-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #79c0ff;
+  font-weight: 500;
+}
+
+.file-status-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: #192231;
+  color: #8da2c0;
+}
+
+.file-content-preview {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #8b949e;
+  background: #080a0f;
+  padding: 6px 8px;
+  border-radius: 4px;
+  max-height: 70px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.simulation-banner {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #14221d;
+  border: 1px solid #223f33;
+  color: #63e2b2;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playground-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 14px;
+}
+
+.preset-btn {
+  background: #171b24;
+  border: 1px solid #2e3544;
+  color: #c2cad8;
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.preset-btn:hover {
+  background: #232a38;
+  border-color: #4a5468;
+  color: #ffffff;
+}
+
+.playground-textarea {
+  width: 100%;
+  background: #0d0f15;
+  border: 1px solid #2a303e;
+  border-radius: 8px;
+  color: #e6ebf5;
+  padding: 12px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  resize: vertical;
+  min-height: 80px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.playground-textarea:focus {
+  outline: none;
+  border-color: #58e0ac;
+  box-shadow: 0 0 0 2px rgb(88 224 172 / 14%);
+}
+
+.engine-select-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.engine-option {
+  padding: 6px 12px;
+  font-size: 11px;
+  border-radius: 6px;
+  border: 1px solid #2a303e;
+  background: #141822;
+  color: #929daf;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.engine-option.active-engine {
+  background: #1a2a24;
+  border-color: #386954;
+  color: #6ce0b3;
+}
+
+.agent-answer-box {
+  background: #141822;
+  border: 1px solid #273142;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.agent-answer-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #79c0ff;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.agent-answer-text {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #dbe2ef;
+}
+

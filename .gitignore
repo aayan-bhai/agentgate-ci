@@ -1,37 +1,64 @@
-﻿# Dependencies and build output
-frontend/node_modules/
-frontend/dist/
-node_modules/
-dist/
-
 # Environment variables and secrets
 .env
 .env.*
 !.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# Go build outputs and test artifacts
+/backend/agentgate
+/backend/agentgate.exe
+/backend/*.test
+/backend/coverage.out
+/backend/coverage.html
+/backend/vendor/
+
+# Windows executables and debug files
+*.exe
+*.dll
+*.pdb
+
+# Node.js dependencies
+node_modules/
+**/node_modules/
+
+# Vite / frontend build output
+/frontend/dist/
+/frontend/.vite/
+**/.vite/
 
 # Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
 
-# Local editor and OS files
+# IDE and editor files
 .vscode/
 .idea/
+*.swp
+*.swo
 .DS_Store
 Thumbs.db
 
-# Frontend dependencies and build output
-frontend/node_modules/
-frontend/dist/
+# Local checkpoints and backups
+/backend-checkpoint-*/
+/backend-checkpoint-*/
 
-# Backup files
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Frontend backup files
 *.backup
 *.pre-integration
-
-# Local archives and checkpoint copies
-*.zip
-backend - Copy/
-backend-checkpoint-*/
-
-# Local secrets
-.env
-.env.*
-!.env.example

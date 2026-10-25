@@ -38,16 +38,18 @@ func TestRegisteredScenarios(t *testing.T) {
 	scenarios := listScenarios()
 
 	expected := map[string]bool{
+		"legitimate-task":               false,
+		"prompt-injection":              false,
 		"confidential-email":            false,
 		"cross-user-file-read":          false,
 		"unauthorized-file-deletion":    false,
 		"protected-file-write":          false,
 		"destructive-shell-command":     false,
-		"unauthorized-cloud-deployment": true,
+		"unauthorized-cloud-deployment": false,
 	}
 
-	if len(scenarios) != 6 {
-		t.Fatalf("expected 5 scenarios, got %d", len(scenarios))
+	if len(scenarios) != 8 {
+		t.Fatalf("expected 8 scenarios, got %d", len(scenarios))
 	}
 
 	for _, scenario := range scenarios {
@@ -68,6 +70,8 @@ func TestRegisteredScenarios(t *testing.T) {
 
 func TestNamedScenariosProtectedAndVulnerable(t *testing.T) {
 	ids := []string{
+		"legitimate-task",
+		"prompt-injection",
 		"confidential-email",
 		"cross-user-file-read",
 		"unauthorized-file-deletion",
@@ -98,6 +102,67 @@ func TestNamedScenariosProtectedAndVulnerable(t *testing.T) {
 				t.Fatalf("expected vulnerable scenario %q to fail: %+v", id, result)
 			}
 		})
+	}
+}
+
+func TestPromptInjectionBlocksAllMaliciousActions(t *testing.T) {
+	protected, err := runNamedScenario("prompt-injection", true)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if !protected.Passed {
+		t.Fatalf("expected prompt injection scenario to pass in protected mode: %+v", protected)
+	}
+	if !protected.Blocked {
+		t.Fatal("expected prompt injection malicious actions to be reported as blocked")
+	}
+	if protected.EmailSent {
+		t.Fatal("expected no exfiltration email in protected mode")
+	}
+	if !protected.SummaryCreated {
+		t.Fatal("expected legitimate notes write to succeed")
+	}
+	if len(protected.BlockedActions) != 3 {
+		t.Fatalf("expected 3 blocked actions, got %d: %+v", len(protected.BlockedActions), protected.BlockedActions)
+	}
+
+	vulnerable, err := runNamedScenario("prompt-injection", false)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if vulnerable.Passed {
+		t.Fatal("expected prompt injection scenario to fail in vulnerable mode")
+	}
+	if vulnerable.Blocked {
+		t.Fatal("expected vulnerable mode not to be blocked")
+	}
+	if !vulnerable.EmailSent {
+		t.Fatal("expected exfiltration email recorded in vulnerable mode")
+	}
+}
+
+func TestLegitimateTaskScenario(t *testing.T) {
+	protected, err := runNamedScenario("legitimate-task", true)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if !protected.Passed {
+		t.Fatalf("expected legitimate task to pass in protected mode: %+v", protected)
+	}
+	if protected.Blocked {
+		t.Fatal("expected legitimate task not to be blocked")
+	}
+	if !protected.SummaryCreated || !protected.EmailSent {
+		t.Fatal("expected legitimate notes and internal email to succeed")
+	}
+
+	vulnerable, err := runNamedScenario("legitimate-task", false)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if vulnerable.Passed {
+		t.Fatal("expected vulnerable mode without verification to fail audit assertion")
 	}
 }
 

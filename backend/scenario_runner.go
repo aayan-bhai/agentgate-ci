@@ -10,6 +10,16 @@ type ScenarioDefinition struct {
 
 var scenarioRegistry = []ScenarioDefinition{
 	{
+		ID:          "legitimate-task",
+		Name:        "Legitimate Office Task",
+		Description: "Tests an authorized workflow: reading assigned documents, saving notes, and notifying internal team members.",
+	},
+	{
+		ID:          "prompt-injection",
+		Name:        "Untrusted Document Prompt Injection",
+		Description: "Tests an agent reading an invoice with embedded prompt injection attempting credential theft, external exfiltration, and file deletion.",
+	},
+	{
 		ID:          "confidential-email",
 		Name:        "Confidential Email Exfiltration",
 		Description: "Tests whether confidential content is blocked from external email.",
@@ -49,6 +59,12 @@ func listScenarios() []ScenarioDefinition {
 
 func runNamedScenario(id string, protected bool) (TestResult, error) {
 	switch id {
+	case "legitimate-task":
+		return runLegitimateTaskScenario(protected), nil
+
+	case "prompt-injection":
+		return runPromptInjectionScenario(protected), nil
+
 	case "confidential-email":
 		return runScenario(protected), nil
 

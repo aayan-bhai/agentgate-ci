@@ -1,0 +1,12 @@
+{
+  "name": "Destructive Command Workflow",
+  "actor": "agent-1",
+  "description": "Agent attempts destructive shell execution",
+  "steps": [
+    {
+      "action": "execute_shell",
+      "resource": "mock-shell",
+      "command": "rm -rf /mock/important-data"
+    }
+  ]
+}
