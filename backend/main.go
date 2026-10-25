@@ -932,15 +932,23 @@ func startHTTPServer(addr string) error {
 func main() {
 	if len(os.Args) > 1 {
 		cmd := os.Args[1]
-		if cmd == "test" || cmd == "run" || cmd == "check" || cmd == "list" || cmd == "serve" || cmd == "server" || cmd == "help" || cmd == "--help" || cmd == "-h" {
+		if cmd == "test" || cmd == "run" || cmd == "check" ||
+			cmd == "list" || cmd == "serve" || cmd == "server" ||
+			cmd == "help" || cmd == "--help" || cmd == "-h" {
 			code := runCLI(os.Args[1:], os.Stdout, os.Stderr)
 			os.Exit(code)
 		}
 	}
 
-	log.Println("AgentGate CI server starting on http://localhost:8080")
-	log.Println("Hint: CLI tools available. Run 'agentgate test --all' or 'agentgate help'")
-	if err := startHTTPServer(":8080"); err != nil {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	addr := "0.0.0.0:" + port
+
+	log.Printf("AgentGate CI server starting on %s", addr)
+	if err := startHTTPServer(addr); err != nil {
 		log.Fatal(err)
 	}
 }
